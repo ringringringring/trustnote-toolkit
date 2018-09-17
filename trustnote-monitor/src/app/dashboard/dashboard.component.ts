@@ -2,6 +2,9 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Component, Injectable, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { Config } from '../../conf';
+import RPCClient from '../../libs/rpcclient';
+
 @Injectable()
 export class RandomUserService {
   randomUserUrl = 'https://api.randomuser.me/';
@@ -26,7 +29,6 @@ export class RandomUserService {
 
 @Injectable()
 export class SupernodeService {
-  host = "ws://dev.mainchain.pow.trustnote.org/"
   randomUserUrl = 'https://api.randomuser.me/';
 
   getUsers(pageIndex: number = 1, pageSize: number = 10, sortField: string, sortOrder: string, genders: string[]): Observable<{}> {
@@ -44,6 +46,27 @@ export class SupernodeService {
   }
 
   constructor(private http: HttpClient) {
+  }
+
+  getShowData(){
+    let index: number = RPCClient.getInstance().getRoundIndex();
+    return [
+      {
+        name   : 'John Brown',
+        gender    : 'male',
+        email: 'New York No. 1 Lake Park'
+      },
+      {
+        name   : 'Jim Green',
+        gender    : 'female',
+        email: 'London No. 1 Lake Park'
+      },
+      {
+        name   : 'Joe Black',
+        gender    : 'male',
+        email: 'Sidney No. 1 Lake Park'
+      }
+    ];
   }
 }
 
@@ -106,6 +129,8 @@ export class DashboardComponent implements OnInit {
   }
 
   searchData(reset: boolean = false): void {
+
+    
     if (reset) {
       this.pageIndex = 1;
     }
