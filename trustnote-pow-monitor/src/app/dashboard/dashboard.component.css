@@ -1,0 +1,14 @@
+nz-sider {
+    flex: 0 0 250px !important;
+    width: 250px !important;
+    max-width: 250px !important;
+}
+
+nz-sider:first-child {
+    background-color: white;
+}
+
+nz-content {
+    background-color: white;
+    margin: 5px;
+}

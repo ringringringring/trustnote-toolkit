@@ -1,0 +1,68 @@
+<nz-layout>
+  <nz-layout>
+    <nz-sider>
+      <ul nz-menu [nzMode]="'inline'" style="width: 240px;">
+        <li nz-submenu>
+          <span title><i class="anticon anticon-appstore"></i>Supernodes</span>
+          <ul>
+            <ul>
+              <li nz-menu-item>Supernode 1&nbsp;&nbsp;&nbsp;<nz-switch></nz-switch></li>
+              <li nz-menu-item>Supernode 2&nbsp;&nbsp;&nbsp;<nz-switch></nz-switch></li>
+            </ul>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-appstore"></i>Properties</span>
+          <ul>
+            <li nz-menu-item>Option 5</li>
+            <li nz-menu-item>Option 6</li>
+            <li nz-submenu>
+              <span title>Submenu</span>
+              <ul>
+                <li nz-menu-item>Option 7</li>
+                <li nz-menu-item>Option 8</li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li nz-submenu>
+          <span title><i class="anticon anticon-setting"></i>Refresh Rate</span>
+          <ul>
+            <li nz-menu-item>Option 9</li>
+            <li nz-menu-item>Option 10</li>
+            <li nz-menu-item>Option 11</li>
+          </ul>
+        </li>
+      </ul>
+    </nz-sider>
+    
+    <nz-content>
+        <nz-table
+        #ajaxTable
+        nzShowSizeChanger
+        [nzFrontPagination]="false"
+        [nzData]="dataSet"
+        [nzLoading]="loading"
+        [nzTotal]="total"
+        [(nzPageIndex)]="pageIndex"
+        [(nzPageSize)]="pageSize"
+        (nzPageIndexChange)="searchData()"
+        (nzPageSizeChange)="searchData(true)">
+        <thead (nzSortChange)="sort($event)" nzSingleSort>
+          <tr>
+            <th nzShowSort nzSortKey="name" nzShowFilter [nzFilters]="filterName" (nzFilterChange)="updateFilter($event)">Supernode</th>
+            <th  nzShowSort nzSortKey="gender" nzShowFilter [nzFilters]="filterGender" (nzFilterChange)="updateFilter($event)">Property</th>
+            <th nzShowSort nzSortKey="email"><span>Value</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of ajaxTable.data">
+            <td>{{data.name.first}} {{data.name.last}}</td>
+            <td>{{data.gender}}</td>
+            <td>{{data.email}}</td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
